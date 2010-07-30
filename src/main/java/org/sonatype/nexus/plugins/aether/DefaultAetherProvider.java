@@ -43,7 +43,8 @@ public class DefaultAetherProvider
         // session.setRepositoryListener( new ConsoleRepositoryListener( System.out ) );
 
         session.setWorkspaceReader( nexusWorkspace.getWorkspaceReader() );
-
+        // session.setUpdatePolicy( "" );
+        
         return session;
     }
 

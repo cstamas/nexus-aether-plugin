@@ -33,6 +33,11 @@ public class NexusWorkspaceReader
         return workspaceRepository;
     }
 
+    /**
+     * This method will in case of released artifact request just locate it, and return if found. In case of snapshot
+     * repository, if it needs resolving, will resolve it 1st and than locate it. It will obey to the session (global
+     * update policy, that correspondos to Maven CLI "-U" option.
+     */
     public File findArtifact( Artifact artifact )
     {
         try
@@ -42,7 +47,7 @@ public class NexusWorkspaceReader
 
             Gav gav =
                 new Gav( artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion(), classifier,
-                    artifact.getExtension(), null, null, null, false, false, null, false, null );
+                    artifact.getExtension(), null, null, null, artifact.isSnapshot(), false, null, false, null );
 
             ArtifactStoreRequest gavRequest;
 
@@ -80,6 +85,9 @@ public class NexusWorkspaceReader
         return null;
     }
 
+    /**
+     * Basically, this method will read the GA metadata, and return the "known versions".
+     */
     public List<String> findVersions( Artifact artifact )
     {
         // TODO Auto-generated method stub

@@ -29,17 +29,22 @@ public class DefaultNexusAether
         return new NexusWorkspace( UUID.randomUUID().toString(), participants );
     }
 
-    public DependencyNode collectDependencies( NexusWorkspace nexusWorkspace, Gav gav, boolean resolve )
+    public Dependency createDependencyFromGav( Gav gav, String scope )
+    {
+        Dependency dependency =
+            new Dependency( new DefaultArtifact( gav.getGroupId(), gav.getArtifactId(), gav.getExtension(),
+                gav.getVersion() ), scope );
+
+        return dependency;
+    }
+
+    public DependencyNode collectDependencies( NexusWorkspace nexusWorkspace, Dependency dependency, boolean resolve )
         throws DependencyCollectionException, ArtifactResolutionException
     {
         RepositorySystem repositorySystem = aetherProvider.getRepositorySystem();
 
         RepositorySystemSession session =
             aetherProvider.getDefaultRepositorySystemSession( repositorySystem, nexusWorkspace );
-
-        Dependency dependency =
-            new Dependency( new DefaultArtifact( gav.getGroupId(), gav.getArtifactId(), gav.getExtension(),
-                gav.getVersion() ), "compile" );
 
         RemoteRepository central = new RemoteRepository( "central", "default", "http://repo1.maven.org/maven2/" );
 
@@ -55,5 +60,4 @@ public class DefaultNexusAether
 
         return node;
     }
-
 }
