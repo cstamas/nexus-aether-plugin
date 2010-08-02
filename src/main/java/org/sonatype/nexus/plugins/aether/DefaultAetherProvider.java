@@ -10,6 +10,7 @@ import org.sonatype.aether.impl.ArtifactDescriptorReader;
 import org.sonatype.aether.impl.internal.DefaultServiceLocator;
 import org.sonatype.aether.util.DefaultRepositorySystemSession;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
+import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 
 @Component( role = AetherProvider.class )
 public class DefaultAetherProvider
@@ -30,8 +31,7 @@ public class DefaultAetherProvider
         return repositorySystem;
     }
 
-    public RepositorySystemSession getDefaultRepositorySystemSession( RepositorySystem repositorySystem,
-                                                                      NexusWorkspace nexusWorkspace )
+    public RepositorySystemSession getDefaultRepositorySystemSession( RepositorySystem repositorySystem )
     {
         DefaultRepositorySystemSession session = DefaultRepositorySystemSession.newMavenRepositorySystemSession();
 
@@ -42,9 +42,19 @@ public class DefaultAetherProvider
         // session.setTransferListener( new ConsoleTransferListener( System.out ) );
         // session.setRepositoryListener( new ConsoleRepositoryListener( System.out ) );
 
-        session.setWorkspaceReader( nexusWorkspace.getWorkspaceReader() );
         // session.setUpdatePolicy( "" );
-        
+
+        return session;
+    }
+
+    public RepositorySystemSession getDefaultRepositorySystemSession( RepositorySystem repositorySystem,
+                                                                      NexusWorkspace nexusWorkspace )
+    {
+        DefaultRepositorySystemSession session =
+            (DefaultRepositorySystemSession) getDefaultRepositorySystemSession( repositorySystem );
+
+        session.setWorkspaceReader( nexusWorkspace.getWorkspaceReader() );
+
         return session;
     }
 
@@ -55,7 +65,7 @@ public class DefaultAetherProvider
         // TODO: We use "manually" managed aether, since it relies on new Plexus capabilities (Optional components)
         // that is unsupported by Plexus used in Nexus!
         // Obviously, this is true for UTs only (since on deploy, plexus-shim is used) :(
-        
+
         DefaultServiceLocator locator = new DefaultServiceLocator();
         // locator.setServices( WagonProvider.class, new ManualWagonProvider() );
         // locator.addService( RepositoryConnectorFactory.class, WagonRepositoryConnectorFactory.class );

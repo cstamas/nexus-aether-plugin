@@ -15,6 +15,7 @@ import org.sonatype.aether.RemoteRepository;
 import org.sonatype.aether.RepositorySystem;
 import org.sonatype.aether.RepositorySystemSession;
 import org.sonatype.nexus.artifact.Gav;
+import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 import org.sonatype.nexus.proxy.maven.MavenRepository;
 
 @Component( role = NexusAether.class )

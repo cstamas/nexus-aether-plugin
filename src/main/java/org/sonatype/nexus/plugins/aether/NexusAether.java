@@ -7,8 +7,14 @@ import org.sonatype.aether.Dependency;
 import org.sonatype.aether.DependencyCollectionException;
 import org.sonatype.aether.DependencyNode;
 import org.sonatype.nexus.artifact.Gav;
+import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 import org.sonatype.nexus.proxy.maven.MavenRepository;
 
+/**
+ * High level functions provided by embedded Aether.
+ * 
+ * @author cstamas
+ */
 public interface NexusAether
 {
     /**

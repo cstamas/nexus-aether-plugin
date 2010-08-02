@@ -9,6 +9,7 @@ import org.sonatype.aether.DependencyCollectionException;
 import org.sonatype.aether.DependencyNode;
 import org.sonatype.nexus.AbstractMavenRepoContentTests;
 import org.sonatype.nexus.artifact.Gav;
+import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 import org.sonatype.nexus.proxy.maven.MavenGroupRepository;
 import org.sonatype.nexus.proxy.maven.MavenHostedRepository;
 import org.sonatype.nexus.proxy.maven.MavenProxyRepository;

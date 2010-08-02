@@ -1,4 +1,4 @@
-package org.sonatype.nexus.plugins.aether;
+package org.sonatype.nexus.plugins.aether.workspace;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +31,7 @@ public class NexusWorkspace
         return Collections.unmodifiableList( repositories );
     }
 
-    protected WorkspaceReader getWorkspaceReader()
+    public WorkspaceReader getWorkspaceReader()
     {
         return new NexusWorkspaceReader( this );
     }

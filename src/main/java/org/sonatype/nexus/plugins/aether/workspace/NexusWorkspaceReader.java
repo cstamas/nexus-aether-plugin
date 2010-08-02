@@ -1,4 +1,4 @@
-package org.sonatype.nexus.plugins.aether;
+package org.sonatype.nexus.plugins.aether.workspace;
 
 import java.io.File;
 import java.util.List;
