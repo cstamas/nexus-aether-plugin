@@ -46,10 +46,10 @@ public class DefaultNexusAether
         RepositorySystemSession session =
             aetherProvider.getDefaultRepositorySystemSession( repositorySystem, nexusWorkspace );
 
-        // RemoteRepository central = new RemoteRepository( "central", "default", "http://repo1.maven.org/maven2-nx/" );
-
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setRoot( dependency );
+        // We don't need any remote repo since we have nexus under the hub as WorkspaceReader
+        // RemoteRepository central = new RemoteRepository( "central", "default", "http://repo1.maven.org/maven2-nx/" );
         // collectRequest.addRepository( central );
         DependencyNode node = repositorySystem.collectDependencies( session, collectRequest ).getRoot();
 

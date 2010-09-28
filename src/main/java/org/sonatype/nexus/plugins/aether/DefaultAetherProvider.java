@@ -29,6 +29,7 @@ public class DefaultAetherProvider
     {
         MavenRepositorySystemSession session = new MavenRepositorySystemSession();
 
+        // can't aether work _without_ local repo?
         LocalRepository localRepo =
             new LocalRepository( applicationConfiguration.getWorkingDirectory( "aether-local-repository" ) );
         session.setLocalRepositoryManager( repositorySystem.newLocalRepositoryManager( localRepo ) );
