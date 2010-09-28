@@ -33,12 +33,6 @@ public class NexusAetherTest
         repositoryRegistry = lookup( RepositoryRegistry.class );
     }
 
-    protected void tearDown()
-        throws Exception
-    {
-        // noop, to prevent cleanup for now, I want to see remains
-    }
-
     protected boolean loadConfigurationAtSetUp()
     {
         return true;
