@@ -53,7 +53,7 @@ public class NexusAetherTest
 
         Gav gav = new Gav( "org.apache.maven", "apache-maven", "3.0-beta-1" );
 
-        resolve( participants, gav );
+        assertEquals( "Root with 27 nodes was expected!", 27, resolve( participants, gav ) );
     }
 
     public void testAetherResolveAgainstCentralRepository()
@@ -65,7 +65,7 @@ public class NexusAetherTest
 
         Gav gav = new Gav( "org.apache.maven", "apache-maven", "3.0-beta-1" );
 
-        resolve( participants, gav );
+        assertEquals( "Root with 27 nodes was expected!", 27, resolve( participants, gav ) );
     }
 
     public void testAetherResolveAgainstReleasesRepositoryThatShouldFail()
@@ -77,19 +77,10 @@ public class NexusAetherTest
 
         Gav gav = new Gav( "org.apache.maven", "apache-maven", "3.0-beta-1" );
 
-        try
-        {
-            resolve( participants, gav );
-
-            fail( "DependencyCollectionException expected!" );
-        }
-        catch ( DependencyCollectionException e )
-        {
-            // good, this should fail, since "releases" hosted repository is empty
-        }
+        assertEquals( "Only the root node was expected!", 1, resolve( participants, gav ) );
     }
 
-    protected void resolve( List<MavenRepository> participants, Gav gav )
+    protected int resolve( List<MavenRepository> participants, Gav gav )
         throws DependencyCollectionException, ArtifactResolutionException
     {
         Dependency dependency = nexusAether.createDependencyFromGav( gav, "compile" );
@@ -98,19 +89,26 @@ public class NexusAetherTest
 
         DependencyNode root = nexusAether.collectDependencies( nexusWorkspace, dependency, false );
 
-        dump( root, "" );
+        return dump( root );
     }
 
     // ==
 
-    private static void dump( DependencyNode node, String indent )
+    protected static int dump( DependencyNode node )
+    {
+        return dump( node, "", 0 );
+    }
+
+    protected static int dump( DependencyNode node, String indent, int count )
     {
         System.out.println( indent + node.getDependency() );
         indent += "  ";
+        int result = count + 1;
         for ( DependencyNode child : node.getChildren() )
         {
-            dump( child, indent );
+            result += dump( child, indent, count );
         }
+        return result;
     }
 
 }
