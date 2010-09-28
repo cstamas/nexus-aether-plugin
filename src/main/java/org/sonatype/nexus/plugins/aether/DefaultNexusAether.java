@@ -5,15 +5,14 @@ import java.util.UUID;
 
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
-import org.sonatype.aether.ArtifactResolutionException;
-import org.sonatype.aether.CollectRequest;
-import org.sonatype.aether.DefaultArtifact;
-import org.sonatype.aether.Dependency;
-import org.sonatype.aether.DependencyCollectionException;
-import org.sonatype.aether.DependencyNode;
-import org.sonatype.aether.RemoteRepository;
 import org.sonatype.aether.RepositorySystem;
 import org.sonatype.aether.RepositorySystemSession;
+import org.sonatype.aether.collection.CollectRequest;
+import org.sonatype.aether.collection.DependencyCollectionException;
+import org.sonatype.aether.graph.Dependency;
+import org.sonatype.aether.graph.DependencyNode;
+import org.sonatype.aether.resolution.ArtifactResolutionException;
+import org.sonatype.aether.util.artifact.DefaultArtifact;
 import org.sonatype.nexus.artifact.Gav;
 import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 import org.sonatype.nexus.proxy.maven.MavenRepository;
@@ -47,11 +46,11 @@ public class DefaultNexusAether
         RepositorySystemSession session =
             aetherProvider.getDefaultRepositorySystemSession( repositorySystem, nexusWorkspace );
 
-        RemoteRepository central = new RemoteRepository( "central", "default", "http://repo1.maven.org/maven2/" );
+        // RemoteRepository central = new RemoteRepository( "central", "default", "http://repo1.maven.org/maven2-nx/" );
 
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setRoot( dependency );
-        collectRequest.addRepository( central );
+        // collectRequest.addRepository( central );
         DependencyNode node = repositorySystem.collectDependencies( session, collectRequest ).getRoot();
 
         if ( resolve )

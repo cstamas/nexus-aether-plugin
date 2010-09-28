@@ -3,10 +3,10 @@ package org.sonatype.nexus.plugins.aether;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sonatype.aether.ArtifactResolutionException;
-import org.sonatype.aether.Dependency;
-import org.sonatype.aether.DependencyCollectionException;
-import org.sonatype.aether.DependencyNode;
+import org.sonatype.aether.collection.DependencyCollectionException;
+import org.sonatype.aether.graph.Dependency;
+import org.sonatype.aether.graph.DependencyNode;
+import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.nexus.AbstractMavenRepoContentTests;
 import org.sonatype.nexus.artifact.Gav;
 import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
@@ -81,7 +81,7 @@ public class NexusAetherTest
         {
             resolve( participants, gav );
 
-            fail();
+            fail( "DependencyCollectionException expected!" );
         }
         catch ( DependencyCollectionException e )
         {

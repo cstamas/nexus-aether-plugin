@@ -1,10 +1,10 @@
 package org.sonatype.nexus.plugins.aether.connector;
 
-import org.sonatype.aether.NoRepositoryConnectorException;
-import org.sonatype.aether.RemoteRepository;
 import org.sonatype.aether.RepositorySystemSession;
+import org.sonatype.aether.repository.RemoteRepository;
 import org.sonatype.aether.spi.connector.RepositoryConnector;
 import org.sonatype.aether.spi.connector.RepositoryConnectorFactory;
+import org.sonatype.aether.transfer.NoRepositoryConnectorException;
 
 public class NexusRepositoryConnectorFactory
     implements RepositoryConnectorFactory

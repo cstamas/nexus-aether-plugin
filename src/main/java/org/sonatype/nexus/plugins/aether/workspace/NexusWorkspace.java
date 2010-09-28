@@ -3,7 +3,7 @@ package org.sonatype.nexus.plugins.aether.workspace;
 import java.util.Collections;
 import java.util.List;
 
-import org.sonatype.aether.WorkspaceReader;
+import org.sonatype.aether.repository.WorkspaceReader;
 import org.sonatype.nexus.proxy.maven.MavenRepository;
 
 public class NexusWorkspace

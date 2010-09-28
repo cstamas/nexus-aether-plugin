@@ -20,8 +20,8 @@
   <description>Nexus plugin providing Sonatype Aether services for interal consumption (like by other plugins).</description>
 
   <properties>
-    <nexus.version>1.7.3-SNAPSHOT</nexus.version>
-    <aether.version>1.1-SNAPSHOT</aether.version>
+    <nexus.version>1.9-SNAPSHOT</nexus.version>
+    <aether.version>1.6</aether.version>
   </properties>
 
   <dependencies>
@@ -42,6 +42,13 @@
       <version>${nexus.version}</version>
       <scope>provided</scope>
     </dependency>
+    <!-- Nexus Core does have this version -->
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>2.0.5</version>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.sonatype.aether</groupId>
@@ -49,14 +56,50 @@
       <version>${aether.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-connector-wagon</artifactId>
+      <version>${aether.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-container-default</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>org.apache.maven</groupId>
-      <artifactId>maven-artifact-descriptor</artifactId>
-      <version>3.0-SNAPSHOT</version>
+      <artifactId>maven-aether-provider</artifactId>
+      <version>3.0-beta-3</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-model</artifactId>
-      <version>3.0-SNAPSHOT</version>
+      <version>3.0-beta-3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-provider-api</artifactId>
+      <version>1.0-beta-6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-file</artifactId>
+      <version>1.0-beta-6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-http-lightweight</artifactId>
+      <version>1.0-beta-6</version>
+      <exclusions>
+        <exclusion>
+          <groupId>nekohtml</groupId>
+          <artifactId>nekohtml</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>nekohtml</groupId>
+          <artifactId>xercesMinimal</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -95,7 +138,7 @@
       <plugin>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-component-metadata</artifactId>
-        <version>1.2.1</version>
+        <version>1.5.4</version>
         <executions>
           <execution>
             <id>process-classes</id>

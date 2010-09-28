@@ -2,10 +2,10 @@ package org.sonatype.nexus.plugins.aether;
 
 import java.util.List;
 
-import org.sonatype.aether.ArtifactResolutionException;
-import org.sonatype.aether.Dependency;
-import org.sonatype.aether.DependencyCollectionException;
-import org.sonatype.aether.DependencyNode;
+import org.sonatype.aether.collection.DependencyCollectionException;
+import org.sonatype.aether.graph.Dependency;
+import org.sonatype.aether.graph.DependencyNode;
+import org.sonatype.aether.resolution.ArtifactResolutionException;
 import org.sonatype.nexus.artifact.Gav;
 import org.sonatype.nexus.plugins.aether.workspace.NexusWorkspace;
 import org.sonatype.nexus.proxy.maven.MavenRepository;

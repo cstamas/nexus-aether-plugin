@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.List;
 
 import org.codehaus.plexus.util.StringUtils;
-import org.sonatype.aether.Artifact;
-import org.sonatype.aether.WorkspaceReader;
-import org.sonatype.aether.WorkspaceRepository;
+import org.sonatype.aether.artifact.Artifact;
+import org.sonatype.aether.repository.WorkspaceReader;
+import org.sonatype.aether.repository.WorkspaceRepository;
 import org.sonatype.nexus.artifact.Gav;
 import org.sonatype.nexus.artifact.IllegalArtifactCoordinateException;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
@@ -43,7 +43,7 @@ public class NexusWorkspaceReader
         try
         {
             // fix for bug in M2GavCalculator
-            final String classifier = StringUtils.isBlank( artifact.getClassifier() ) ? null : artifact.getClassifier();
+            final String classifier = StringUtils.isEmpty( artifact.getClassifier() ) ? null : artifact.getClassifier();
 
             Gav gav =
                 new Gav( artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion(), classifier,
